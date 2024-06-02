@@ -4,7 +4,9 @@
   "main": "index.js",
   "private": "true",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "NODE_ENV=production node index.js",
+    "dev": "NODE_ENV=development node index.js --watch",
+    "test": "NODE_ENV=test node --test"
   },
   "keywords": [],
   "author": "",
