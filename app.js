@@ -2,6 +2,8 @@ const express = require('express')
 const cors = require('cors')
 const db = require('./database/db')
 
+const usersRouter = require('./controllers/users')
+
 const middleware = require('./utils/middleware')
 
 const app = express()
@@ -11,6 +13,9 @@ db.syncTable()
 
 app.use(cors())
 app.use(express.json())
+
+// Routing
+app.use('/api/users', usersRouter)
 
 // Middleware
 app.use(middleware.unknownEndPoint)
