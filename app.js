@@ -15,7 +15,7 @@ app.use(cors())
 app.use(express.json())
 
 // Routing
-app.use('/api/users', usersRouter)
+app.use('/api', usersRouter)
 
 // Middleware
 app.use(middleware.unknownEndPoint)
