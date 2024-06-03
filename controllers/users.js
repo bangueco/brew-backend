@@ -1,6 +1,12 @@
 const usersRouter = require('express').Router()
 const User = require('../models/user')
 
+usersRouter.get('/', async (request, response) => {
+  const users = await User.findAll()
+
+  return response.status(200).json(users)
+})
+
 usersRouter.post('/', async (request, response) => {
   try {
 
