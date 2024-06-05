@@ -30,19 +30,19 @@ usersRouter.post('/login', async (request, response) => {
 usersRouter.post('/register', async (request, response) => {
   try {
 
-    let { first_name, last_name, password } = request.body
+    let { username, first_name, last_name, password } = request.body
 
     const saltRounds = 10
     password = await bcrypt.hash(password, saltRounds)
 
     const newUser = await User.create({
-      first_name, last_name, password
+      username, first_name, last_name, password
     })
   
     return response.status(201).json(newUser)
 
   } catch(error) {
-    return response.status(400).json({'error': error.errors[0].message})
+    return response.status(400).json({'error': error})
   }
 })
 
