@@ -11,15 +11,31 @@ const User = db.sequelize.define(
     },
     username: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      unique: true,
+      validate: {
+        notEmpty: true,
+        min: 3,
+        max: 15
+      }
     },
     first_name: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      validate: {
+        notEmpty: true,
+        min: 2,
+        max: 18
+      }
     },
     last_name: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      validate: {
+        notEmpty: true,
+        min: 2,
+        max: 18
+      }
     },
     password: {
       type: DataTypes.STRING,
