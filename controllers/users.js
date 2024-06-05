@@ -27,7 +27,7 @@ usersRouter.post('/login', async (request, response) => {
   }
 })
 
-usersRouter.post('/register', async (request, response) => {
+usersRouter.post('/register', async (request, response, next) => {
   try {
 
     let { username, first_name, last_name, password } = request.body
@@ -42,7 +42,7 @@ usersRouter.post('/register', async (request, response) => {
     return response.status(201).json(newUser)
 
   } catch(error) {
-    return response.status(400).json({'error': error})
+    next(error)
   }
 })
 

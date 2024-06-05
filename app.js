@@ -19,5 +19,6 @@ app.use('/api', usersRouter)
 
 // Middleware
 app.use(middleware.unknownEndPoint)
+app.use(middleware.errorHandler)
 
 module.exports = app
