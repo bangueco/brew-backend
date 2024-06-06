@@ -32,8 +32,10 @@ usersRouter.post('/register', async (request, response, next) => {
 
     let { username, first_name, last_name, password } = request.body
 
-    const saltRounds = 10
-    password = await bcrypt.hash(password, saltRounds)
+    if (!password != true) {
+      const saltRounds = 10
+      password = await bcrypt.hash(password, saltRounds)
+    }
 
     const newUser = await User.create({
       username, first_name, last_name, password
