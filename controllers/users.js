@@ -9,21 +9,28 @@ usersRouter.get('/users', async (request, response) => {
   return response.status(200).json(users)
 })
 
-usersRouter.post('/login', async (request, response) => {
+usersRouter.post('/login', async (request, response, next) => {
   try {
 
     let { username, password } = request.body
 
     const user = await User.findOne({where: { username: username }})
 
-    if (user.password !== password && !user) {
+    if (!user) {
       throw new Error('invalid username or password')
     }
 
-    
+    const match = await bcrypt.compare(password, user.password)
+
+    if (!match) {
+      throw new Error('invalid username or password')
+    }
+
+    const token = jwt.sign({id: user.id, username: user.username}, process.env.SECRET_KEY)
+    return response.status(200).json({id: user.id, username: user.username, token: token})
 
   } catch(error) {
-    return response.status(400).json({'error': error})
+    return next(error)
   }
 })
 
