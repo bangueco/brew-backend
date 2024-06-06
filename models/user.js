@@ -12,6 +12,7 @@ const User = db.sequelize.define(
     username: {
       type: DataTypes.STRING,
       allowNull: false,
+      notEmpty: true,
       unique: true,
       validate: {
         notEmpty: true,
@@ -23,23 +24,38 @@ const User = db.sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        notEmpty: true,
         min: 2,
-        max: 18
+        max: 18,
+        notNull: {
+          msg: 'First name is required'
+        },
+        notEmpty: {
+          msg: 'First name must not be empty'
+        }
       }
     },
     last_name: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        notEmpty: true,
         min: 2,
-        max: 18
+        max: 18,
+        notNull: {
+          msg: 'Last name is required'
+        },
+        notEmpty: {
+          msg: 'Last name must not be empty'
+        }
       }
     },
     password: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          msg: 'Password must not be empty'
+        }
+      }
     }
   }
 )
