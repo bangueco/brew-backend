@@ -17,13 +17,13 @@ usersRouter.post('/login', async (request, response, next) => {
     const user = await User.findOne({where: { username: username }})
 
     if (!user) {
-      throw new Error('invalid username or password')
+      return response.status(400).json({error: 'invalid username'})
     }
 
     const match = await bcrypt.compare(password, user.password)
 
     if (!match) {
-      throw new Error('invalid username or password')
+      return response.status(400).json({error: 'invalid password'})
     }
 
     const token = jwt.sign({id: user.id, username: user.username}, process.env.SECRET_KEY)
