@@ -27,8 +27,14 @@ const Drink = db.sequelize.define(
       type: DataTypes.INTEGER,
       allowNull: false,
       validate: {
-        min: 2,
-        max: 18,
+        min: {
+          args: [10],
+          msg: 'Price must be greater than or equal 10'
+        },
+        max: {
+          args: [1000],
+          msg: 'Price must be less than or equal 1000'
+        },
         notNull: {
           msg: 'Price is required'
         },
