@@ -3,6 +3,7 @@ const cors = require('cors')
 const db = require('./database/db')
 
 const usersRouter = require('./controllers/users')
+const drinksRouter = require('./controllers/drinks')
 
 const middleware = require('./utils/middleware')
 
@@ -16,6 +17,7 @@ app.use(express.json())
 
 // Routing
 app.use('/api', usersRouter)
+app.use('/api/drinks', drinksRouter)
 
 // Middleware
 app.use(middleware.unknownEndPoint)
