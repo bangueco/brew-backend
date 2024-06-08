@@ -3,10 +3,16 @@ const bcrypt = require('bcrypt')
 const usersRouter = require('express').Router()
 const User = require('../models/user')
 
+const middleware = require('../utils/middleware')
+
 usersRouter.get('/users', async (request, response) => {
   const users = await User.findAll()
 
   return response.status(200).json(users)
+})
+
+usersRouter.post('/users/info', middleware.authenticateToken, (request, response) => {
+  return response.status(200).json({userData: request.user})
 })
 
 usersRouter.post('/login', async (request, response, next) => {
