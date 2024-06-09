@@ -16,7 +16,7 @@ productsRouter.post('/', async (request, response, next) => {
       name, price
     })
   
-    return response.status(201).json({newDrink})
+    return response.status(201).json(newDrink)
 
   } catch(error) {
     next(error)
